@@ -35,7 +35,6 @@ namespace EsseEhBom.Data
 
     public class ApplicationUser : IdentityUser
     {
-        public virtual string FirstName { get; set; }
         public virtual string LateName { get; set; }
         public virtual DateTime Birth { get; set; }
         public virtual string State { get; set; }

@@ -44,20 +44,45 @@ namespace EsseEhBom.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "O formato do e-mail não é válido.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [DataType(DataType.Text)]
+            [Display(Name = "Primeiro nome")]
+            public virtual string UserName { get; set; }
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Último nome")]
+            public virtual string LateName { get; set; }
+
+            [Required]
+            [Display(Name = "Data de nascimento")]
+            [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
+            [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
+            public virtual DateTime Birth { get; set; }
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Estado")]
+            public virtual string State { get; set; }
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Cidade")]
+            public virtual string City { get; set; }
+
+            [Required]
+            [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Confirmar senha")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Confirmar senha")]
+            [Compare("Password", ErrorMessage = "As senhas não se correspondem!.")]
             public string ConfirmPassword { get; set; }
+
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -72,30 +97,18 @@ namespace EsseEhBom.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+                var user = new ApplicationUser {
+                    UserName = Input.UserName,
+                    LateName = Input.LateName,
+                    Birth = Input.Birth,
+                    State = Input.State,
+                    City = Input.City,
+                    Email = Input.Email 
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
-
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    }
+                    return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
                 }
                 foreach (var error in result.Errors)
                 {
