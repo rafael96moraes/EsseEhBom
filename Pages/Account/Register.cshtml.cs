@@ -50,7 +50,7 @@ namespace EsseEhBom.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Nick")]
+            [Display(Name = "Usuário")]
             public virtual string UserName { get; set; }
 
             [Required]

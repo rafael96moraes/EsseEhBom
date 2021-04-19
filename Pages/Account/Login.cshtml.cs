@@ -39,8 +39,7 @@ namespace EsseEhBom.Pages.Account
         public class InputModel
         {
             [Required]
-            [Display(Name = "Email")]
-            [EmailAddress]
+            [Display(Name = "Usuário")]
             public string Email { get; set; }
 
             [Required]
