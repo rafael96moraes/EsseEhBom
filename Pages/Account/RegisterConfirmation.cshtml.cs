@@ -38,7 +38,7 @@ namespace EsseEhBom.Pages.Account
                 return NotFound($"E-mail não encontrado: '{email}'.");
             }
 
-            Welcome = $"Prezado, {user.UserName + " " + user.LateName}! Sua conta foi criada com sucesso, portanto você já pode fazer login no nosso sistema!";
+            Welcome = $"Prezado, {user.UserName}! Sua conta foi criada com sucesso, portanto você já pode fazer login no nosso sistema!";
             return Page();
         }
     }

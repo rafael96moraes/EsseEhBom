@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 
 namespace EsseEhBom.Models
 {
-    public class MainCastSerie
+    public class Catalog
     {
         public int Id { get; set; }
-        public Serie Serie { get; set; }
-        public Actor Actor { get; set; }
+
+        public List<Movie> Movies { get; set; }
+        public List<Serie> Series { get; set; }
+        public List<Book> Books { get; set; }
     }
 }
