@@ -50,8 +50,14 @@ namespace EsseEhBom.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Primeiro nome")]
+            [Display(Name = "Nick")]
             public virtual string UserName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Primeiro nome")]
+            public virtual string FirstName { get; set; }
+
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Último nome")]
@@ -99,6 +105,7 @@ namespace EsseEhBom.Pages.Account
             {
                 var user = new ApplicationUser {
                     UserName = Input.UserName,
+                    FirstName = Input.FirstName,
                     LateName = Input.LateName,
                     Birth = Input.Birth,
                     State = Input.State,

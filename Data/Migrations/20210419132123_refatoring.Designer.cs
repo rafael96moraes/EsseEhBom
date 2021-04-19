@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EsseEhBom.Migrations
+namespace EsseEhBom.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210413181352_FixLogin")]
-    partial class FixLogin
+    [Migration("20210419132123_refatoring")]
+    partial class refatoring
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,7 +123,7 @@ namespace EsseEhBom.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("EsseEhBom.Models.Serie", b =>
