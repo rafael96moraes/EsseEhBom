@@ -4,16 +4,14 @@ using EsseEhBom.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EsseEhBom.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20210413181352_FixLogin")]
-    partial class FixLogin
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +44,9 @@ namespace EsseEhBom.Migrations
                     b.Property<string>("Author")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CatalogId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
@@ -60,7 +61,49 @@ namespace EsseEhBom.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CatalogId");
+
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Catalog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Catalog");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int?>("CatalogId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("CatalogId");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("EsseEhBom.Models.MainCastMovie", b =>
@@ -70,13 +113,17 @@ namespace EsseEhBom.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActorId")
+                    b.Property<int?>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MovieId")
+                    b.Property<int?>("MovieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("MovieId");
 
                     b.ToTable("MainCastMovies");
                 });
@@ -88,13 +135,17 @@ namespace EsseEhBom.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ActorId")
+                    b.Property<int?>("ActorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SerieId")
+                    b.Property<int?>("SerieId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ActorId");
+
+                    b.HasIndex("SerieId");
 
                     b.ToTable("MainCastSeries");
                 });
@@ -105,6 +156,9 @@ namespace EsseEhBom.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CatalogId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -123,7 +177,9 @@ namespace EsseEhBom.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Movie");
+                    b.HasIndex("CatalogId");
+
+                    b.ToTable("Movies");
                 });
 
             modelBuilder.Entity("EsseEhBom.Models.Serie", b =>
@@ -132,6 +188,9 @@ namespace EsseEhBom.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CatalogId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
@@ -146,6 +205,8 @@ namespace EsseEhBom.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CatalogId");
 
                     b.ToTable("Series");
                 });
@@ -378,6 +439,72 @@ namespace EsseEhBom.Migrations
                     b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
+            modelBuilder.Entity("EsseEhBom.Models.Book", b =>
+                {
+                    b.HasOne("EsseEhBom.Models.Catalog", null)
+                        .WithMany("Books")
+                        .HasForeignKey("CatalogId");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Comment", b =>
+                {
+                    b.HasOne("EsseEhBom.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("ApplicationUserId");
+
+                    b.HasOne("EsseEhBom.Models.Catalog", "Catalog")
+                        .WithMany()
+                        .HasForeignKey("CatalogId");
+
+                    b.Navigation("ApplicationUser");
+
+                    b.Navigation("Catalog");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.MainCastMovie", b =>
+                {
+                    b.HasOne("EsseEhBom.Models.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId");
+
+                    b.HasOne("EsseEhBom.Models.Movie", "Movie")
+                        .WithMany()
+                        .HasForeignKey("MovieId");
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.MainCastSerie", b =>
+                {
+                    b.HasOne("EsseEhBom.Models.Actor", "Actor")
+                        .WithMany()
+                        .HasForeignKey("ActorId");
+
+                    b.HasOne("EsseEhBom.Models.Serie", "Serie")
+                        .WithMany()
+                        .HasForeignKey("SerieId");
+
+                    b.Navigation("Actor");
+
+                    b.Navigation("Serie");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Movie", b =>
+                {
+                    b.HasOne("EsseEhBom.Models.Catalog", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("CatalogId");
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Serie", b =>
+                {
+                    b.HasOne("EsseEhBom.Models.Catalog", null)
+                        .WithMany("Series")
+                        .HasForeignKey("CatalogId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -427,6 +554,15 @@ namespace EsseEhBom.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("EsseEhBom.Models.Catalog", b =>
+                {
+                    b.Navigation("Books");
+
+                    b.Navigation("Movies");
+
+                    b.Navigation("Series");
                 });
 #pragma warning restore 612, 618
         }
