@@ -5,9 +5,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Criar</h1>
 
-<h4>Serie</h4>
+<h4>Série</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,24 +24,34 @@
                 <span asp-validation-for="Serie.Director" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Serie.Director" class="control-label"></label>
+                <input asp-for="Serie.Director" class="form-control" />
+                <span asp-validation-for="Serie.Director" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Serie.Country" class="control-label"></label>
                 <input asp-for="Serie.Country" class="form-control" />
                 <span asp-validation-for="Serie.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Serie.Year" class="control-label"></label>
-                <input asp-for="Serie.Year" class="form-control" />
-                <span asp-validation-for="Serie.Year" class="text-danger"></span>
+                <label asp-for="Serie.Release" class="control-label"></label>
+                <input asp-for="Serie.Release" class="form-control" />
+                <span asp-validation-for="Serie.Release" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Serie.SeasonNumber" class="control-label"></label>
+                <input asp-for="Serie.SeasonNumber" class="form-control" />
+                <span asp-validation-for="Serie.SeasonNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Voltar para lista</a>
 </div>
 
 @section Scripts {

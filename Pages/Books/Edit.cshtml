@@ -5,9 +5,9 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>Book</h4>
+<h4>Livro</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -35,19 +35,19 @@
                 <span asp-validation-for="Book.Country" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Book.ReleaseYear" class="control-label"></label>
-                <input asp-for="Book.ReleaseYear" class="form-control" />
-                <span asp-validation-for="Book.ReleaseYear" class="text-danger"></span>
+                <label asp-for="Book.ReleaseRelease" class="control-label"></label>
+                <input asp-for="Book.ReleaseRelease" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                <span asp-validation-for="Book.ReleaseRelease" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Salvar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index">Adicionar na lista</a>
 </div>
 
 @section Scripts {

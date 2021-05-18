@@ -49,41 +49,41 @@ namespace EsseEhBom.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Usuário")]
-            public virtual string UserName { get; set; }
+            public string UserName { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Primeiro nome")]
-            public virtual string FirstName { get; set; }
+            public string FirstName { get; set; }
 
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Último nome")]
-            public virtual string LateName { get; set; }
+            public string LateName { get; set; }
 
             [Required]
             [Display(Name = "Data de nascimento")]
             [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
             [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
-            public virtual DateTime Birth { get; set; }
+            public DateTime Birth { get; set; }
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Estado")]
-            public virtual string State { get; set; }
+            public string State { get; set; }
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Cidade")]
-            public virtual string City { get; set; }
+            public string City { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
+            [StringLength(30, ErrorMessage = "{0} deve ter pelo menos {2} e no máximo {1} caracteres.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirmar senha")]
+            [Display(Name = "Senha")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
             [Display(Name = "Confirmar senha")]
-            [Compare("Password", ErrorMessage = "As senhas não se correspondem!.")]
+            [Compare("Password", ErrorMessage = "As senhas não se correspondem.")]
             public string ConfirmPassword { get; set; }
 
 
@@ -121,7 +121,6 @@ namespace EsseEhBom.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
     }
