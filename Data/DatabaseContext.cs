@@ -25,7 +25,7 @@ namespace EsseEhBom.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<MainCastMovie> MainCastMovies { get; set; }
         public DbSet<MainCastSerie> MainCastSeries { get; set; }
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<CommentMovie> Comments { get; set; }
         public DbSet<ApplicationUser> AplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

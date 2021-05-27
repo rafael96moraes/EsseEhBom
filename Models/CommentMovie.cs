@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EsseEhBom.Models
 {
-    public class Comment
+    public class CommentMovie
     {
         public int Id { get; set; }
 
@@ -17,7 +17,8 @@ namespace EsseEhBom.Models
         [Display(Name = "Texto")]
         public string Text { get; set; }
 
-        public Catalog Catalog { get; set; }
+        public int MovieId { get; set; }
+        public Movie Movie { get; set; }
 
         [Display(Name = "Usuário")]
         public ApplicationUser ApplicationUser { get; set; }

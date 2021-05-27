@@ -10,10 +10,10 @@ namespace EsseEhBom.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Série")]
+        public int SerieId { get; set; }
         public Serie Serie { get; set; }
 
-        [Display(Name = "Ator")]
+        public int ActorId { get; set; }
         public Actor Actor { get; set; }
     }
 }
