@@ -20,7 +20,7 @@ namespace EsseEhBom.Models
         public int SerieId { get; set; }
         public Movie Serie { get; set; }
 
-        [Display(Name = "Usuário")]
         public ApplicationUser ApplicationUser { get; set; }
+        public string UserName { get; set; }
     }
 }

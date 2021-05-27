@@ -1,5 +1,9 @@
 ﻿@page
+@using Microsoft.AspNetCore.Identity
+@using EsseEhBom.Data
+
 @model EsseEhBom.Pages.Movies.DetailsModel
+@inject SignInManager<ApplicationUser> SignInManager
 
 @{
     ViewData["Title"] = "Details";
@@ -40,4 +44,51 @@
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Movie.Id">Editar</a> |
     <a asp-page="./Index">Voltar para lista</a>
+</div>
+
+<br />
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<div class="container bootdey">
+    <div class="col-md-12 bootstrap snippets">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <form method="post">
+                <div class="panel">
+                    <div class="panel-body">
+                        <textarea asp-for="Comment.Text" class="form-control" rows="2" placeholder="O que você achou do filme? Conte pra gente =)"></textarea>
+                        <input type="hidden" asp-for="Comment.MovieId" value="@Model.Movie.Id" class="form-control" />
+                        <input type="hidden" asp-for="Comment.UserName" value="@User.Identity.Name" class="form-control" />
+                        <div class="mar-top clearfix">
+                            <button class="btn btn-sm btn-primary pull-right" type="submit"><i class="fa fa-pencil fa-fw"></i> Share</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+
+        @foreach (var item in Model.Comments)
+        {
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="media-block">
+                        <div class="media-body">
+                            <div class="mar-btm">
+                                <a href="#" class="btn-link text-semibold media-heading box-inline">@Html.DisplayFor(modelItem => item.UserName)</a>
+                            </div>
+                            <p> @Html.DisplayFor(modelItem => item.Text)</p>
+                            <div class="pad-ver">
+                                <span class="tag tag-sm"><i class="fa fa-heart text-danger"></i> 250 Likes</span>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-default btn-hover-success" href="#"><i class="fa fa-thumbs-up"></i></a>
+                                    <a class="btn btn-sm btn-default btn-hover-danger" href="#"><i class="fa fa-thumbs-down"></i></a>
+                                </div>
+                                <a class="btn btn-sm btn-default btn-hover-primary" href="#">Comment</a>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>

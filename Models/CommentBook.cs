@@ -20,7 +20,7 @@ namespace EsseEhBom.Models
         public int BookId { get; set; }
         public Book Book { get; set; }
 
-        [Display(Name = "Usuário")]
         public ApplicationUser ApplicationUser { get; set; }
+        public string UserName { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace EsseEhBom.Models
         public int MovieId { get; set; }
         public Movie Movie { get; set; }
 
-        [Display(Name = "Usuário")]
         public ApplicationUser ApplicationUser { get; set; }
+        public string UserName { get; set; }
     }
 }
