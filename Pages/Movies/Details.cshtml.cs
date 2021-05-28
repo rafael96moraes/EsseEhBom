@@ -21,9 +21,9 @@ namespace EsseEhBom.Pages.Movies
         }
 
         public Movie Movie { get; set; }
-        public List<CommentMovie> Comments { get; set; }
+        public List<ReviewMovie> Comments { get; set; }
         [BindProperty]
-        public CommentMovie Comment { get; set; }
+        public ReviewMovie Comment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

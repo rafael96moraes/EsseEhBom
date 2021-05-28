@@ -62,7 +62,7 @@
             <form method="post">
                 <div class="panel">
                     <div class="panel-body">
-                        <textarea asp-for="Comment.Text" class="form-control" rows="2" placeholder="O que você achou do filme? Conte pra gente =)"></textarea>
+                        <textarea asp-for="Comment.Text" class="form-control" rows="2" placeholder= "O que você achou do filme? Conte pra gente =)"></textarea>
                         <input type="hidden" asp-for="Comment.SerieId" value="@Model.Serie.Id" class="form-control" />
                         <input type="hidden" asp-for="Comment.UserName" value="@User.Identity.Name" class="form-control" />
                         <div class="mar-top clearfix">

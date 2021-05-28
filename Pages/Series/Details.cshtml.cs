@@ -24,9 +24,9 @@ namespace EsseEhBom.Pages.Series
 
         public ApplicationUser UserView { get; set; }
         public Serie Serie { get; set; }
-        public List<CommentSerie> Comments { get; set; }
+        public List<ReviewSerie> Comments { get; set; }
         [BindProperty]
-        public CommentSerie Comment { get; set; }
+        public ReviewSerie Comment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

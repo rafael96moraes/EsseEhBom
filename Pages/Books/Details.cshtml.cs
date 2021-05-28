@@ -20,9 +20,9 @@ namespace EsseEhBom.Pages.Books
             _context = context;
         }
         public Book Book { get; set; }
-        public List<CommentBook> Comments { get; set; }
+        public List<ReviewBook> Comments { get; set; }
         [BindProperty]
-        public CommentBook Comment { get; set; }
+        public ReviewBook Comment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
