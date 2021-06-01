@@ -25,10 +25,10 @@ namespace EsseEhBom.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Release { get; set; }
 
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         public bool IsApproved { get; set; }
 
-        public int Administrator { get; set; }
+        public string Administrator { get; set; }
     }
 }

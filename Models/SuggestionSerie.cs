@@ -26,10 +26,10 @@ namespace EsseEhBom.Models
 
         [Display(Name = "Total de temporadas")]
         public int SeasonNumber { get; set; }
-        public int ApplicationUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         public bool IsApproved { get; set; }
 
-        public int Administrator { get; set; }
+        public string Administrator { get; set; }
     }
 }

@@ -4,14 +4,16 @@ using EsseEhBom.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace EsseEhBom.Migrations
+namespace EsseEhBom.Data.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20210528200010_EditTables")]
+    partial class EditTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -77,27 +79,6 @@ namespace EsseEhBom.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Friends");
-                });
-
-            modelBuilder.Entity("EsseEhBom.Models.InvitationFriend", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FriendUserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAccepted")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InvitationsFriend");
                 });
 
             modelBuilder.Entity("EsseEhBom.Models.MainCastMovie", b =>

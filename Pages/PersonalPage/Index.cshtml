@@ -1,0 +1,84 @@
+﻿@page
+@model EsseEhBom.Pages.PersonalPage.IndexModel
+@{
+}
+
+<div class="bg-primary text-center py-2 mb-4">
+    <div class="container">
+        <a class="badge badge-pill badge-success text-white">Aceitar</a>
+        <a asp-page="./Visit" asp-route-userName="@Model.Teste">Editar</a> |
+    </div>
+</div>
+
+<div class="bg-primary text-center py-2 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">Lista de amigos</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top rounded-circle">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Web Developer</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Web Developer</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Web Developer</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Web Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="bg-warning text-center py-2 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">Solicitação de amizade</h1>
+    </div>
+</div>
+<ul class="list-group">
+    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        A list item
+        <div>
+            <a class="badge badge-pill badge-success text-white">Aceitar</a>
+            <a class="badge badge-pill badge-danger text-white">Recusar</a>
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        A second list item
+        <div>
+            <span class="badge badge-pill badge-primary">Primary</span>
+            <span class="badge badge-pill badge-secondary">Secondary</span>
+        </div>
+    </li>
+    <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        A third list item
+        <div>
+            <span class="badge badge-pill badge-primary">Primary</span>
+            <span class="badge badge-pill badge-secondary">Secondary</span>
+        </div>
+    </li>
+</ul>

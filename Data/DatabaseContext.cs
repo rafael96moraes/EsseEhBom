@@ -28,6 +28,7 @@ namespace EsseEhBom.Data
         public DbSet<ReviewSerie> CommentsSerie { get; set; }
         public DbSet<ReviewBook> CommentsBook { get; set; }
         public DbSet<Friend> Friends { get; set; }
+        public DbSet<InvitationFriend> InvitationsFriend { get; set; }
         public DbSet<ApplicationUser> AplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
