@@ -26,28 +26,32 @@ namespace EsseEhBom.Pages.PersonalPage
             _signInManager = signInManager;
         }
 
-        public List<Friend> Friends { get; set; }
+        public List<Friend> MyFriends { get; set; }
         public List<Friend> MutualFriends { get; set; }
         public List<Friend> FriendsOtherUser = new List<Friend>();
         public InvitationFriend InvitationFriend { get; set; }
         public string Message { get; set; }
         public bool IsFriend { get; set; }
+        public bool? TryInvitation {get;set;}
+        public string NameOtherUser { get; set; }
+        public List<ReviewBook> ReviewBooks { get; set; }
+        public List<ReviewSerie> ReviewSeries { get; set; }
+        public List<ReviewMovie> ReviewMovies { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string userName)
+        public async Task<IActionResult> OnGetAsync(string userName, bool? invitation = null)
         {
             var user = await _userManager.GetUserAsync(User);
             var otherUser = await _userManager.FindByNameAsync(userName);
+            NameOtherUser = otherUser.UserName;
             if (user == null || otherUser == null)
             {
                 return NotFound();
             }
-
-
-            Friends = await _context.Friends.Where(m => m.ApplicationUserId == user.Id).ToListAsync();
+            MyFriends = await _context.Friends.Where(m => m.ApplicationUserId == user.Id).ToListAsync();
             FriendsOtherUser = await _context.Friends.Where(m => m.ApplicationUserId == otherUser.Id).ToListAsync();
 
             //Amizade em comum
-            foreach(var friend in Friends)
+            foreach(var friend in MyFriends)
             {
                 var mutualFriends = FriendsOtherUser
                     .FirstOrDefault(f => f.ApplicationUserId == friend.ApplicationUserId);
@@ -58,8 +62,25 @@ namespace EsseEhBom.Pages.PersonalPage
             }
 
             // Verificar se já são amigos
-            IsFriend = Friends.Exists(a => a.FriendUserId == otherUser.Id);
+            IsFriend = MyFriends.Exists(a => a.FriendUserId == otherUser.Id);
 
+            TryInvitation = invitation;
+
+            ReviewBooks = await _context.CommentsBook
+                .Include(u => u.Book)
+                .AsNoTracking()
+                .Where(c => c.UserName == otherUser.UserName)
+                .ToListAsync();
+            ReviewSeries = await _context.CommentsSerie
+                .Include(u => u.Serie)
+                .AsNoTracking()
+                .Where(c => c.UserName == otherUser.UserName)
+                .ToListAsync();
+            ReviewMovies = await _context.CommentsMovie
+                .Include(u => u.Movie)
+                .AsNoTracking()
+                .Where(c => c.UserName == otherUser.UserName)
+                .ToListAsync();
 
             return Page();
         }
@@ -73,7 +94,6 @@ namespace EsseEhBom.Pages.PersonalPage
                 return NotFound();
             }
 
-
             // Verificar se ja mandou invite
             var e = await _context.InvitationsFriend
                 .Where(f => f.ApplicationUserId == otherUser.Id)
@@ -81,7 +101,8 @@ namespace EsseEhBom.Pages.PersonalPage
 
             if (e != null)
             {
-                Message = "Voce já mandou o convite antes!";
+                bool? result = false;
+                return RedirectToPage("./Visit", new { userName = userName, invitation = result });
             }
             else
             {
@@ -93,7 +114,7 @@ namespace EsseEhBom.Pages.PersonalPage
                 _context.InvitationsFriend.Add(invitation);
                 await _context.SaveChangesAsync();
             }
-            return Page();
+            return RedirectToPage("./Visit", new { userName = userName, invitation = true });
         }
     }
 }

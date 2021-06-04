@@ -1,4 +1,181 @@
 ﻿@page
 @model EsseEhBom.Pages.PersonalPage.VisitPageModel
 @{
+    ViewData["Title"] = "Visitar a página pessoal do usuário";
+}
+
+<h1>
+    @Model.NameOtherUser
+</h1>
+
+<br />
+
+
+<div class="text-center">
+    @if (!Model.IsFriend)
+    {
+        <div class="form-group">
+            <p>Quer solicitar um pedido de amizade com <strong>@Model.NameOtherUser</strong>?</p>
+        </div>
+        <div class="form-group">
+            <form method="post">
+                <input type="submit" value="Solicitar amizade!" class="btn btn-success" />
+            </form>
+        </div>
+    }
+    @if (@Model.TryInvitation != null)
+    {
+        if (Model.TryInvitation == true)
+        {
+            <p class="text-success"><strong>Você mandou o pedido de solicitação de amizade!</strong></p>
+        }
+        else
+        {
+            <p class="text-danger"><strong>Você já mandou o pedido de soliticação amizade antes! Espere a pessoa responder a solicitação.</strong></p>
+        }
+    }
+</div>
+
+
+<div class="bg-info text-center py-2 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">Amigos em comum do <strong>@Model.NameOtherUser</strong></h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top rounded-circle">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 1</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 2</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 3</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class="bg-primary text-center py-2 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">Lista de amigos do <strong>@Model.NameOtherUser</strong></h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top rounded-circle">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 1</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 2</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 3</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-0 shadow">
+                <img src="https://freepikpsd.com/media/2019/10/avatar-perfil-png-5.png" class="card-img-top" alt="...">
+                <div class="card-body text-center">
+                    <div class="card-text text-black-50">Amigo 4</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="bg-secondary text-center py-2 mb-4">
+    <div class="container">
+        <h1 class="font-weight-light text-white">As avaliações do <strong>@Model.NameOtherUser</strong></h1>
+    </div>
+</div>
+@if (Model.ReviewBooks != null && Model.ReviewSeries != null && Model.ReviewMovies != null)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Título
+                </th>
+                <th>
+                    Seu comentário:
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ReviewBooks)
+            {
+                <tr>
+                    <td>
+                        <strong>Livro: </strong>@item.Book.Title
+                    </td>
+                    <td>
+                        @item.Text
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model.ReviewSeries)
+            {
+                <tr>
+                    <td>
+                        <strong>Série: </strong>@item.Serie.Title
+                    </td>
+                    <td>
+                        @item.Text
+                    </td>
+                </tr>
+            }
+            @foreach (var item in Model.ReviewMovies)
+            {
+                <tr>
+                    <td>
+                        <strong>Filme: </strong>@item.Movie.Title
+                    </td>
+                    <td>
+                        @item.Text
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

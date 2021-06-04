@@ -79,7 +79,7 @@
                     <div class="media-block">
                         <div class="media-body">
                             <div class="mar-btm">
-                                <a href="#" class="btn-link text-semibold media-heading box-inline">@Html.DisplayFor(modelItem => item.UserName)</a>
+                                <a asp-area="" asp-page="/PersonalPage/Visit" asp-route-userName="@item.UserName" class="btn-link text-semibold media-heading box-inline">@Html.DisplayFor(modelItem => item.UserName)</a>
                             </div>
                             <p> @Html.DisplayFor(modelItem => item.Text)</p>
                             <div class="pad-ver">

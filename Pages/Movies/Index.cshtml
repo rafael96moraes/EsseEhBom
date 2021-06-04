@@ -1,55 +1,63 @@
 ﻿@page
 @model EsseEhBom.Pages.Movies.IndexModel
 
+@using Microsoft.AspNetCore.Identity
+@using EsseEhBom.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Início";
 }
 
 <h1>Filmes</h1>
-
+@if (SignInManager.IsSignedIn(User))
+{
 <p>
-    <a asp-page="Create">Adicionar um novo filme no catálogo</a>
+    <a asp-page="Create">Sugerir um novo filme no catálogo</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Director)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Movie[0].Release)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Movie)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Director)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Release)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detalhe</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+} 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie[0].Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie[0].Director)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie[0].Country)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movie[0].Release)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Movie)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Director)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Country)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Release)
+                    </td>
+                    <td>
+                        <!-- <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> | -->
+                        <a asp-page="./Details" asp-route-id="@item.Id">Detalhe</a> <!--|-->
+                        <!--<a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>-->
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

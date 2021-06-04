@@ -8,7 +8,7 @@
 <h1>Séries</h1>
 
 <p>
-    <a asp-page="Create">Adicionar uma nova série no catálogo</a>
+    <a asp-page="Create">Sugerir uma nova série no catálogo</a>
 </p>
 <table class="table">
     <thead>
@@ -44,9 +44,9 @@
                 @Html.DisplayFor(modelItem => item.Release)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detalhe</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
+                <!--<a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |-->
+                <a asp-page="./Details" asp-route-id="@item.Id">Detalhe</a> <!--|-->
+                <!--<a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>-->
             </td>
         </tr>
 }

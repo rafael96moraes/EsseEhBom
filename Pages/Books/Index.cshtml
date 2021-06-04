@@ -1,15 +1,22 @@
 ﻿@page
 @model EsseEhBom.Pages.Books.IndexModel
 
+@using Microsoft.AspNetCore.Identity
+@using EsseEhBom.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Livros</h1>
+@if (SignInManager.IsSignedIn(User))
+{
+<p><a asp-page="Create">Sugerir um novo livro no catálogo</a></p>
+}
 
-<p>
-    <a asp-page="Create">Adicionar um novo livro no catálogo</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -32,29 +39,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Book) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishingCompany)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseRelease)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Detalhes</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Book)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PublishingCompany)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Country)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseRelease)
+                </td>
+                <td>
+                    <!--<a asp-page="./Edit" asp-route-id="@item.Id">Editar</a> | -->
+                    <a asp-page="./Details" asp-route-id="@item.Id">Detalhes</a><!-- | -->
+                    <!--<a asp-page="./Delete" asp-route-id="@item.Id">Deletar</a> -->
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -32,7 +32,10 @@ namespace EsseEhBom.Pages.Books
             }
 
             Book = await _context.Books.FirstOrDefaultAsync(m => m.Id == id);
-            Comments = await _context.CommentsBook.Where(m => m.BookId == id).OrderByDescending(m => m.Id).ToListAsync();
+            Comments = await _context.CommentsBook
+                .Where(m => m.BookId == id)
+                .OrderByDescending(m => m.Id)
+                .ToListAsync();
 
             if (Book == null)
             {

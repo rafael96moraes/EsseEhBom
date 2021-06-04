@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using EsseEhBom.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -30,9 +36,12 @@
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-page="/Books/Index">Livros</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-page="/PersonalPage/Index">Minha página pessoal</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User)) 
+                        { 
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-page="/PersonalPage/Index">Minha página pessoal</a>
+                            </li>
+                        }    
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
