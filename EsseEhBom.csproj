@@ -23,4 +23,8 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\img\ESSEEHBOM.png" />
+  </ItemGroup>
+
 </Project>
